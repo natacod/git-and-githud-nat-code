@@ -1,0 +1,8 @@
+{
+    "editor.mouseWheelZoom": true,
+    "terminal.integrated.mouseWheelZoom": true,
+    "editor.fontSize": 12,
+    "files.exclude": {
+        "**/.git": false
+    }
+}
