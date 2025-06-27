@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Success Court School</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Mobile menu styles */
+    @media (max-width: 768px) {
+      .nav-links {
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: #4e54c8;
+        width: 200px;
+        display: none;
+        padding: 1rem;
+        border-radius: 0 0 0 10px;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      #menu-toggle {
+        display: block;
+      }
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9f9fb;
+      margin: 0;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .main-header {
+      background: linear-gradient(90deg, #4e54c8, #8f94fb);
+      color: white;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    #menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      background: transparent;
+      border: none;
+      color: white;
+    }
+
+    .hero {
+      background: url('https://placehold.co/1200x500') no-repeat center center/cover;
+      padding: 4rem 2rem;
+      text-align: center;
+      color: white;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    #cta-btn {
+      background-color: #4e54c8;
+      border: none;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    #cta-btn:hover {
+      background-color: #3d40a8;
+    }
+
+    .features, .gallery, .contact {
+      padding: 4rem 2rem;
+      max-width: 1100px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .cards {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      padding: 1.5rem;
+      flex: 1 1 250px;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-grid img:hover {
+      transform: scale(1.05);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    input, textarea {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    button[type="submit"] {
+      background-color: #4e54c8;
+      color: white;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #3d40a8;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+    }
+      .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #4e54c8;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: none;
+      flex-direction: column;
+      border-radius: 0 0 5px 5px;
+      z-index: 1001;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: flex;
+    }
+
+    .dropdown-menu li a {
+      display: block;
+      padding: 0.75rem 1.25rem;
+      color: white;
+      text-decoration: none;
+    }
+
+    .dropdown-menu li a:hover {
+      background-color: #3d40a8;
+    }
+
+</style>
+</head>
+<body>
+  <header class="main-header">
+    <div class="container">
+      <h1 class="logo">The Success Court School</h1>
+      <nav>
+  <ul class="nav-links">
+    <li class="dropdown">
+      <a href="#">Departments ▾</a>
+      <ul class="dropdown-menu">
+        <li><a href="#basic">Basic School</a></li>
+        <li><a href="#jhs">JHS Department</a></li>
+        <li><a href="#ict">ICT & Innovation Hub</a></li>
+      </ul>
+    </li>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#features">Why Choose Us</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#staff">Staff</a></li>
+    <li><a href="#calendar">Calendar</a></li>
+    <li><a href="#downloads">Downloads</a></li>
+  </ul>
+</nav>
+      </nav>
+      <button id="menu-toggle">☰</button>
+    </div>
+    <p style="text-align:center; margin: 0; font-style: italic; font-weight: 500;">Success is our hallmark</p>
+  </header>
+  
+  <section class="hero" id="home">
+  <div class="hero-content">
+    <h2>Welcome to Success Court School</h2>
+    <p>Empowering students with quality education and holistic growth.</p>
+    <button id="cta-btn">Join Us</button>
+    <p id="message"></p>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <h2>Our Features</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Responsive Design</h3>
+      <p>Looks great on all devices, whether it's mobile, tablet, or desktop.</p>
+    </div>
+    <div class="card">
+      <h3>Animated Interface</h3>
+      <p>Smooth transitions and engaging animations to enhance user experience.</p>
+    </div>
+    <div class="card">
+      <h3>Dark Mode</h3>
+      <p>Switch between light and dark themes with ease.</p>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <h2>Image Gallery</h2>
+  <div class="gallery-grid">
+    <img src="https://placehold.co/300x200" alt="Gallery Image 1">
+    <img src="https://placehold.co/300x200" alt="Gallery Image 2">
+    <img src="https://placehold.co/300x200" alt="Gallery Image 3">
+    <img src="https://placehold.co/300x200" alt="Gallery Image 4">
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <h2>Contact Us</h2>
+  <form id="contactForm">
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+  <p id="form-message"></p>
+</section>
+
+<section class="news" id="news">
+  <h2>School News & Announcements</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>New Academic Year</h3>
+      <p>Our 2025 academic year begins on September 10. Enroll now!</p>
+    </div>
+    <div class="card">
+      <h3>Excursion to Elmina Castle</h3>
+      <p>Our JHS students will be visiting Elmina Castle for historical studies.</p>
+    </div>
+    <div class="card">
+      <h3>PTA Meeting</h3>
+      <p>Join us on July 15 for our second-term PTA meeting in the school hall.</p>
+    </div>
+  </div>
+</section>
+
+<section class="staff" id="staff">
+  <h2>Meet Our Staff</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Mrs. Adwoa Mensah</h3>
+      <p>Headmistress - A visionary leader with 20+ years of experience.</p>
+    </div>
+    <div class="card">
+      <h3>Mr. Kwesi Nyarko</h3>
+      <p>Mathematics Teacher - Inspiring excellence in every learner.</p>
+    </div>
+    <div class="card">
+      <h3>Ms. Linda Boateng</h3>
+      <p>ICT Coordinator - Passionate about technology in education.</p>
+    </div>
+  </div>
+</section>
+
+<section class="calendar" id="calendar">
+  <h2>Academic Calendar</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>First Term</h3>
+      <p>January 15 – April 5</p>
+    </div>
+    <div class="card">
+      <h3>Second Term</h3>
+      <p>May 1 – July 31</p>
+    </div>
+    <div class="card">
+      <h3>Third Term</h3>
+      <p>September 10 – December 15</p>
+    </div>
+  </div>
+</section>
+
+<section class="downloads" id="downloads">
+  <h2>Downloads</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>2025 Academic Calendar</h3>
+      <p><a href="#">Download PDF</a></p>
+    </div>
+    <div class="card">
+      <h3>Newsletter - Term 1</h3>
+      <p><a href="#">Download PDF</a></p>
+    </div>
+    <div class="card">
+      <h3>BECE Timetable</h3>
+      <p><a href="#">Download PDF</a></p>
+    </div>
+  </div>
+</section>
+
+<section id="basic">
+  <div class="features">
+    <h2>Basic School Department</h2>
+    <p>Focusing on foundational knowledge and character development for pupils.</p>
+    <img src="https://placehold.co/800x400?text=Basic+Classroom" alt="Basic School" style="width:100%; border-radius:10px; margin:1rem 0;">
+    <p><a href="#">Download Basic School Syllabus</a></p>
+  </div>
+</section>
+
+<section id="jhs">
+  <div class="features">
+    <h2>JHS Department</h2>
+    <p>Preparing students for BECE with intensive academic and moral training.</p>
+    <img src="https://placehold.co/800x400?text=JHS+Classroom" alt="JHS Department" style="width:100%; border-radius:10px; margin:1rem 0;">
+    <p><a href="#">Download JHS Curriculum</a></p>
+  </div>
+</section>
+
+<section id="ict">
+  <div class="features">
+    <h2>ICT & Innovation Hub</h2>
+    <p>Empowering learners with 21st-century digital skills and creativity.</p>
+    <img src="https://placehold.co/800x400?text=ICT+Lab" alt="ICT Hub" style="width:100%; border-radius:10px; margin:1rem 0;">
+    <p><a href="#">Download ICT Program Outline</a></p>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 Success Court School. All rights reserved.</p>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  document.getElementById("menu-toggle").addEventListener("click", () => {
+    document.querySelector(".nav-links").classList.toggle("show");
+  });
+  document.getElementById("cta-btn").addEventListener("click", () => {
+    document.getElementById("message").textContent = "Thanks for joining Success Court School! 🎉";
+  });
+
+  document.getElementById("contactForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    document.getElementById("form-message").textContent = "Your message has been sent! ✅";
+  });
+</script>
